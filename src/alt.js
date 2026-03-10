@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", async() => {
-  const playPauseBtn = document.getElementById("pause-play-btn")
-  const volSliderLabel = document.getElementById("vol-slider-label")
-  const volSlider = document.getElementById("vol-slider")
+  const playPauseBtn = document.getElementById("pause-play-btn-mini")
+  const volSliderLabel = document.getElementById("vol-slider-label-mini")
+  const volSlider = document.getElementById("vol-slider-mini")
   // const volBtn = document.getElementById("vol-btn")
 
   const audioPlayer = document.getElementById("audio-player")
 
-  const albumCoverHolder = document.getElementById("album-cover-img")
+//   const albumCoverHolder = document.getElementById("album-cover-img")
 
-  const currentlyPlayingIndicator = document.getElementById("currently-playing")
-  const recentlyPlayedBox = document.getElementById("previously-played-listing")
+  const currentlyPlayingIndicator = document.getElementById("currently-playing-mini")
+//   const recentlyPlayedBox = document.getElementById("previously-played-listing")
 
   playState = true
   volSliderLabel.innerHTML = `${volSlider.value}%`
@@ -66,20 +66,20 @@ document.addEventListener("DOMContentLoaded", async() => {
     } catch{
       // Retry on next setInterval call
       console.error("Live365 API query failed!")
-      recentlyPlayedBox.innerHTML = ""
+    //   recentlyPlayedBox.innerHTML = ""
       currentlyPlayingIndicator = "Connecting to station..."
       return
     }
     
     // List out all the recently played tracks
-    const recentlyPlayed = parsedRes["last-played"] 
-    recentlyPlayedBox.innerHTML = ""
-    recentlyPlayed.forEach(element => {
-      let d = new Date(element["start"])
-      recentlyPlayedBox.innerHTML += `
-        <p>[${d.toLocaleTimeString("en-US", {hour:"2-digit", minute:"2-digit"})}] ${element["title"]} - ${element["artist"]}</p>
-      `
-    })
+    // const recentlyPlayed = parsedRes["last-played"] 
+    // recentlyPlayedBox.innerHTML = ""
+    // recentlyPlayed.forEach(element => {
+    //   let d = new Date(element["start"])
+    //   recentlyPlayedBox.innerHTML += `
+    //     <p>[${d.toLocaleTimeString("en-US", {hour:"2-digit", minute:"2-digit"})}] ${element["title"]} - ${element["artist"]}</p>
+    //   `
+    // })
 
     // Current track and album art renders
     if(parsedRes["is_playing"] === false) {
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     } else {
       let current = parsedRes["current-track"]
       currentlyPlayingIndicator.innerHTML = `${current["title"]} - ${parsedRes["current-track"]["artist"]}`
-      albumCoverHolder.src = current["art"]
+    //   albumCoverHolder.src = current["art"]
     }
   } 
 
